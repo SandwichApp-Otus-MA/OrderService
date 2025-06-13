@@ -1,0 +1,25 @@
+spring:
+  jpa:
+    database: postgresql
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        default_schema: ${DATASOURCE_SCHEMA_NAME:public}
+        jdbc:
+          time_zone: UTC
+        query:
+          fail_on_pagination_over_collection_fetch: true
+          in_clause_parameter_padding: true
+  datasource:
+    url: ${DATASOURCE_URL:jdbc:postgresql://localhost:5432/postgres}
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres_secret}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:db/migration/changelog-master.xml
+    default-schema: ${DATASOURCE_SCHEMA_NAME:public}
+    liquibase-schema: ${DATASOURCE_SCHEMA_NAME:public}
+    enabled: true

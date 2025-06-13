@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: order-service
+  config:
+    import: db.yml
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.sandwich.app: DEBUG
