@@ -29,8 +29,7 @@ public class OrderController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<OrderDto> create(@Valid @RequestBody OrderDto order) {
-        orderService.create(order);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<UUID> create(@Valid @RequestBody OrderDto order) {
+        return ResponseEntity.ok(orderService.create(order));
     }
 }

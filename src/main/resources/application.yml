@@ -10,3 +10,18 @@ server:
 logging:
   level:
     com.sandwich.app: DEBUG
+
+management:
+  endpoint:
+    metrics:
+      access: read_only
+    prometheus:
+      access: read_only
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
+  endpoints:
+    web.exposure:
+      include: '*'

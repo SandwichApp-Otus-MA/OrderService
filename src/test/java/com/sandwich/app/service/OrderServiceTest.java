@@ -74,6 +74,7 @@ class OrderServiceTest {
     void create_shouldSaveNewOrder_whenOrderDoesNotExist() {
         when(orderRepository.findById(TEST_ID)).thenReturn(Optional.empty());
         when(orderMapper.convert(any(OrderEntity.class), eq(testOrderDto))).thenReturn(testOrderEntity);
+        when(orderRepository.save(any())).thenReturn(new OrderEntity());
 
         orderService.create(testOrderDto);
 

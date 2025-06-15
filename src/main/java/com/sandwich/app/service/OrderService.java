@@ -27,13 +27,13 @@ public class OrderService {
     }
 
     @Transactional
-    public void create(OrderDto order) {
+    public UUID create(OrderDto order) {
         Optional.ofNullable(order.getId())
             .flatMap(id -> orderRepository.findById(order.getId())).ifPresent(o -> {
                 throw new IllegalStateException("Заказ c id: %s уже существует!".formatted(order.getId()));
             });
 
         var newOrder = orderMapper.convert(new OrderEntity(), order);
-        orderRepository.save(newOrder);
+        return orderRepository.save(newOrder).getId();
     }
 }
