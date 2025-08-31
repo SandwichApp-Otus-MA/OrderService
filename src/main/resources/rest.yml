@@ -1,0 +1,11 @@
+rest:
+  clients:
+    timeout:
+      connect-timeout: ${CONNECT_TIMEOUT:5s}
+      read-timeout: ${READ_TIMEOUT:30s}
+    billing:
+      url: ${BILLING_SERVICE_URL:http://localhost:8080}
+      endpoints:
+        deposit: ${DEPOSIT_USER_ACCOUNT_ENDPOINT:/v1/user-account/deposit/{id}}
+        create-payment: ${CREATE_PAYMENT_ENDPOINT:/v1/payment/create}
+        check-status: ${CHECK_PAYMENT_STATUS_ENDPOINT:/v1/payment/check-status/{id}}

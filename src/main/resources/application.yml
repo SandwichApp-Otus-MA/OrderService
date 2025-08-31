@@ -2,10 +2,12 @@ spring:
   application:
     name: order-service
   config:
-    import: db.yml
+    import:
+      - db.yml
+      - rest.yml
 
 server:
-  port: 8080
+  port: 8081
 
 logging:
   level:

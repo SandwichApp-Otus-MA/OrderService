@@ -9,7 +9,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.sandwich.app.domain.dto.OrderDto;
+import com.sandwich.app.domain.dto.order.OrderDto;
 import com.sandwich.app.domain.entity.OrderEntity;
 import com.sandwich.app.domain.repository.OrderRepository;
 import com.sandwich.app.mapper.OrderMapper;

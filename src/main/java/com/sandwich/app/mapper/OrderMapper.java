@@ -1,6 +1,6 @@
 package com.sandwich.app.mapper;
 
-import com.sandwich.app.domain.dto.OrderDto;
+import com.sandwich.app.domain.dto.order.OrderDto;
 import com.sandwich.app.domain.entity.OrderEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

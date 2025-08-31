@@ -1,0 +1,62 @@
+# Default values for helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: default
+
+replicaCount: 1
+
+image:
+  repository: androcksus/order-service
+  pullPolicy: Always
+  tag: latest
+
+startupProbe:
+  httpGet:
+    path: actuator/health/liveness
+    port: 8080
+  periodSeconds: 10
+  failureThreshold: 60
+
+readinessProbe:
+  httpGet:
+    path: actuator/health/readiness
+    port: 8080
+  initialDelaySeconds: 15
+  periodSeconds: 30
+  failureThreshold: 3
+
+livenessProbe:
+  httpGet:
+    path: actuator/health/liveness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 30
+  failureThreshold: 3
+
+resources:
+  limits:
+    cpu: "0.5"
+    memory: "800Mi"
+  requests:
+    cpu: "0.05"
+    memory: "500Mi"
+
+service:
+  port: 8080
+  targetPort: 8080
+  type: ClusterIP
+
+ingress:
+  host: "arch.homework"
+  path: "/order-service/"
+  annotations:
+    nginx.org/rewrites: "serviceName=order-service rewrite=/"
+
+configmap:
+  SPRING_DATASOURCE_USERNAME: "postgres"
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-k-postgresql:{{ .Values.db_port | default 5432 }}/order-service"
+  BILLING_SERVICE_URL: "http://billing-service"
+secrets:
+  SPRING_DATASOURCE_PASSWORD: "postgres-pswd"
+existingSecret: "sandwich-secret"
