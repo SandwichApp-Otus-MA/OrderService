@@ -57,6 +57,8 @@ configmap:
   SPRING_DATASOURCE_USERNAME: "postgres"
   SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-k-postgresql:{{ .Values.db_port | default 5432 }}/order-service"
   BILLING_SERVICE_URL: "http://billing-service"
+  DELIVERY_SERVICE_URL: "http://delivery-service"
+  RESTAURANT_SERVICE_URL: "http://restaurant-service"
 secrets:
   SPRING_DATASOURCE_PASSWORD: "postgres-pswd"
 existingSecret: "sandwich-secret"

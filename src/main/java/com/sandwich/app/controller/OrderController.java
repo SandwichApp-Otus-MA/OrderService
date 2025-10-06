@@ -1,6 +1,6 @@
 package com.sandwich.app.controller;
 
-import com.sandwich.app.domain.dto.order.OrderDto;
+import com.sandwich.app.models.model.order.OrderDto;
 import com.sandwich.app.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

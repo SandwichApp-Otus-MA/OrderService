@@ -7,5 +7,16 @@ rest:
       url: ${BILLING_SERVICE_URL:http://localhost:8080}
       endpoints:
         deposit: ${DEPOSIT_USER_ACCOUNT_ENDPOINT:/v1/user-account/deposit/{id}}
+        refund: ${REFUND_ENDPOINT:/v1/payment/refund/{billingId}/{orderId}}
         create-payment: ${CREATE_PAYMENT_ENDPOINT:/v1/payment/create}
         check-status: ${CHECK_PAYMENT_STATUS_ENDPOINT:/v1/payment/check-status/{id}}
+    delivery:
+      url: ${DELIVERY_SERVICE_URL:http://localhost:8081}
+      endpoints:
+        create: ${DELIVERY_CREATE_ENDPOINT:/v1/delivery/create}
+        cancel: ${DELIVERY_CANCEL_ENDPOINT:/v1/delivery/cancel/{deliveryId}/{orderId}}
+    restaurant:
+      url: ${DELIVERY_SERVICE_URL:http://localhost:8082}
+      endpoints:
+        create: ${RESTAURANT_CREATE_ENDPOINT:/v1/restaurant/create}
+        cancel: ${RESTAURANT_CANCEL_ENDPOINT:/v1/restaurant/cancel/{restaurantId}/{orderId}}

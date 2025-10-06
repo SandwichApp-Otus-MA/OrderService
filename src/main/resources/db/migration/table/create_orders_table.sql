@@ -1,11 +1,18 @@
 --liquibase formatted sql
 --changeset AVoronov:v1.0.0/orders
 
-CREATE TABLE IF NOT EXISTS orders
+create table if not exists orders
 (
-    id uuid NOT NULL PRIMARY KEY,
-    is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
-    deleted_at TIMESTAMP WITHOUT TIME ZONE,
-    user_id uuid NOT NULL,
-    position_ids uuid[] NOT NULL
+    id uuid not null primary key,
+    is_deleted boolean,
+    deleted_at timestamp without time zone,
+    user_id uuid not null,
+    payment_id uuid,
+    restaurant_id uuid,
+    restaurant_comment text,
+    delivery_id uuid,
+    delivery_address text,
+    delivery_comment text,
+    amount decimal,
+    status varchar(64)
 );
