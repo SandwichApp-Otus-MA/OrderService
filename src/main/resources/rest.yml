@@ -16,7 +16,7 @@ rest:
         create: ${DELIVERY_CREATE_ENDPOINT:/v1/delivery/create}
         cancel: ${DELIVERY_CANCEL_ENDPOINT:/v1/delivery/cancel/{deliveryId}/{orderId}}
     restaurant:
-      url: ${DELIVERY_SERVICE_URL:http://localhost:8083}
+      url: ${RESTAURANT_SERVICE_URL:http://localhost:8083}
       endpoints:
-        create-order: ${RESTAURANT_CREATE_ENDPOINT:/v1/restaurant/create/order}
+        create-order: ${RESTAURANT_CREATE_ORDER_ENDPOINT:/v1/restaurant/create/order}
         cancel: ${RESTAURANT_CANCEL_ENDPOINT:/v1/restaurant/cancel/{restaurantId}/{orderId}}
