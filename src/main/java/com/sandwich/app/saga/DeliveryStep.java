@@ -30,16 +30,18 @@ public class DeliveryStep implements SagaStep<OrderEntity> {
             var deliveryId = deliveryService.create(new DeliveryDto()
                 .setOrderId(order.getId())
                 .setRestaurantId(order.getRestaurantId())
-                .setDeliveryAddress(order.getDeliveryAddress())
+                .setAddress(order.getDeliveryAddress())
                 .setComment(order.getDeliveryAddress()));
             order.setDeliveryId(deliveryId);
             order.setStatus(OrderStatus.DELIVERY_ASSIGNED);
             log.info("Delivery assigned successfully for order: {}", order.getId());
-            orderRepository.save(order);
             return SagaStepResult.SUCCESS;
         } catch (Exception e) {
             log.error("Delivery assignment failed for order: {}", order.getId(), e);
+            order.setStatus(OrderStatus.DELIVERY_FAILED);
             return SagaStepResult.FAILURE;
+        } finally {
+            orderRepository.save(order);
         }
     }
 

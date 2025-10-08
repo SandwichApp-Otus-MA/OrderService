@@ -97,7 +97,7 @@ class OrderServiceTest {
         var exception = assertThrows(IllegalStateException.class, () -> orderService.create(testOrderDto));
         assertEquals("Заказ c id: " + TEST_ID + " уже существует!", exception.getMessage());
         verify(orderRepository).findById(TEST_ID);
-        verify(orderMapper, never()).convert(any(), any());
+        verify(orderMapper, never()).convert(any(OrderEntity.class), any());
         verify(orderRepository, never()).save(any());
     }
 }

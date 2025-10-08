@@ -6,7 +6,9 @@ create table if not exists orders
     id uuid not null primary key,
     is_deleted boolean,
     deleted_at timestamp without time zone,
+    created_at timestamp without time zone not null default now(),
     user_id uuid not null,
+    checksum text not null,
     payment_id uuid,
     restaurant_id uuid,
     restaurant_comment text,
@@ -14,5 +16,6 @@ create table if not exists orders
     delivery_address text,
     delivery_comment text,
     amount decimal,
-    status varchar(64)
+    status varchar(64),
+    position_ids uuid[]
 );

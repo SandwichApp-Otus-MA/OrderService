@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class DefaultErrorHandler {
 
     @ExceptionHandler
-    public ResponseEntity<AppExceptionResponse> defaultHandler(Throwable exception) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-            .body(new AppExceptionResponse()
-                .setStatus(HttpStatus.BAD_REQUEST)
-                .setErrorMessage(exception.getMessage()));
+    public AppExceptionResponse defaultHandler(Throwable exception) {
+        return new AppExceptionResponse()
+            .setStatus(HttpStatus.BAD_REQUEST)
+            .setErrorMessage(exception.getMessage());
     }
 }

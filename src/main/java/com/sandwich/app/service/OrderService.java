@@ -5,6 +5,7 @@ import com.sandwich.app.domain.repository.OrderRepository;
 import com.sandwich.app.mapper.OrderMapper;
 import com.sandwich.app.models.model.enums.OrderStatus;
 import com.sandwich.app.models.model.order.OrderDto;
+import com.sandwich.app.models.utils.HashUtils;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import java.time.Instant;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 @Slf4j
@@ -41,19 +44,27 @@ public class OrderService {
                 });
 
             var newOrder = orderMapper.convert(new OrderEntity(), order);
+            var checksum = HashUtils.calculateChecksum(newOrder, Set.of("createdAt"));
+
+            orderRepository.findByChecksum(checksum, Instant.now().minusSeconds(15 * 60)).ifPresent(existOrder -> {
+                throw new IllegalStateException("Такой заказ уже существует! id: %s".formatted(existOrder.getId()));
+            });
+
+            newOrder.setChecksum(checksum);
+
             return orderRepository.save(newOrder);
         })).orElseThrow(() -> new IllegalStateException("Не удалось создать заказ!"));
 
-        log.info("Starting order processing saga for order: {}", order.getId());
+        log.debug("Starting order processing saga for order: {}", newOrderEntity.getId());
         var result = sagaExecutor.executeSaga(orderSagaDefinition, newOrderEntity);
 
         if (result.isSuccess()) {
             order.setStatus(OrderStatus.COMPLETED);
-            orderRepository.save(newOrderEntity);
         } else {
             order.setStatus(OrderStatus.CANCELLED);
         }
 
+        orderRepository.save(newOrderEntity);
         log.debug("Saga execution details: {}", result.getMessage());
         result.getStepExecutions().forEach(step ->
             log.debug("Step {}: {} (compensation: {})", step.getStepName(), step.getResult(), step.isCompensation()));

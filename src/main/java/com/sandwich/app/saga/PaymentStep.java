@@ -37,12 +37,13 @@ public class PaymentStep implements SagaStep<OrderEntity> {
             order.setPaymentId(response.getId());
             order.setStatus(OrderStatus.PAYMENT_COMPLETED);
             log.info("Payment processed successfully for order: {}", order.getId());
-            orderRepository.save(order);
             return SagaStepResult.SUCCESS;
         } catch (Exception e) {
             log.error("Payment failed for order: {}", order.getId(), e);
             order.setStatus(OrderStatus.PAYMENT_FAILED);
             return SagaStepResult.FAILURE;
+        } finally {
+            orderRepository.save(order);
         }
     }
 
