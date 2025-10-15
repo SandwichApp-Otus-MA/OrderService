@@ -59,6 +59,7 @@ configmap:
   BILLING_SERVICE_URL: "http://billing-service"
   DELIVERY_SERVICE_URL: "http://delivery-service"
   RESTAURANT_SERVICE_URL: "http://restaurant-service"
+  SERVER_PORT: 8080
 secrets:
   SPRING_DATASOURCE_PASSWORD: "postgres-pswd"
 existingSecret: "sandwich-secret"
