@@ -47,12 +47,6 @@ service:
   targetPort: 8080
   type: ClusterIP
 
-ingress:
-  host: "arch.homework"
-  path: "/order-service/"
-  annotations:
-    nginx.org/rewrites: "serviceName=order-service rewrite=/"
-
 configmap:
   SPRING_DATASOURCE_USERNAME: "postgres"
   SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-k-postgresql:{{ .Values.db_port | default 5432 }}/order-service"
