@@ -4,7 +4,6 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Values.namespace }}
   labels:
-    name: {{ .Release.Name }}
     app: {{ .Release.Name }}
 spec:
   replicas: 1
@@ -22,7 +21,7 @@ spec:
     spec:
       restartPolicy: Always
       containers:
-        - name: {{ .Release.Name }}
+        - name: order-service
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:

@@ -56,9 +56,9 @@ ingress:
 configmap:
   SPRING_DATASOURCE_USERNAME: "postgres"
   SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-k-postgresql:{{ .Values.db_port | default 5432 }}/order-service"
-  BILLING_SERVICE_URL: "http://billing-service"
-  DELIVERY_SERVICE_URL: "http://delivery-service"
-  RESTAURANT_SERVICE_URL: "http://restaurant-service"
+  BILLING_SERVICE_URL: "http://billing-service:8080"
+  DELIVERY_SERVICE_URL: "http://delivery-service:8080"
+  RESTAURANT_SERVICE_URL: "http://restaurant-service:8080"
   SERVER_PORT: 8080
 secrets:
   SPRING_DATASOURCE_PASSWORD: "postgres-pswd"
