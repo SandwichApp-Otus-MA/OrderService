@@ -1,5 +1,6 @@
 package com.sandwich.app.controller;
 
+import com.sandwich.app.models.model.enums.OrderStatus;
 import com.sandwich.app.models.model.order.OrderDto;
 import com.sandwich.app.service.OrderService;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
@@ -31,5 +33,11 @@ public class OrderController {
     @PostMapping("/create")
     public ResponseEntity<UUID> create(@Valid @RequestBody OrderDto order) {
         return ResponseEntity.ok(orderService.create(order));
+    }
+
+    @PostMapping("/change-status/{orderId}")
+    public ResponseEntity<Void> changeStatus(@PathVariable UUID orderId, @RequestParam OrderStatus status) {
+        orderService.changeStatus(orderId, status);
+        return ResponseEntity.ok().build();
     }
 }
