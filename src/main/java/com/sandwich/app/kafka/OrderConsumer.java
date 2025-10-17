@@ -19,7 +19,7 @@ public class OrderConsumer {
 
     @KafkaListener(
         containerFactory = "orderListenerContainerFactory",
-        topics = "${sandwich.kafka.consumer.topic.notification}",
+        topics = "${sandwich.kafka.consumer.topic.order}",
         groupId = "${sandwich.kafka.consumer.group-id}",
         errorHandler = "kafkaListenerErrorHandler",
         autoStartup = "false")
