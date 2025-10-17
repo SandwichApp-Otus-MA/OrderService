@@ -5,6 +5,7 @@ spring:
     import:
       - db.yml
       - rest.yml
+      - kafka.yml
 
 server:
   port: ${SERVER_PORT:8080}

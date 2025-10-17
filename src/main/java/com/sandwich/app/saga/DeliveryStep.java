@@ -31,7 +31,7 @@ public class DeliveryStep implements SagaStep<OrderEntity> {
                 .setOrderId(order.getId())
                 .setRestaurantId(order.getRestaurantId())
                 .setAddress(order.getDeliveryAddress())
-                .setComment(order.getDeliveryAddress()));
+                .setComment(order.getDeliveryComment()));
             order.setDeliveryId(deliveryId);
             order.setStatus(OrderStatus.DELIVERY_ASSIGNED);
             log.info("Delivery assigned successfully for order: {}", order.getId());

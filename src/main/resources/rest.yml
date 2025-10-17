@@ -18,5 +18,5 @@ rest:
     restaurant:
       url: ${RESTAURANT_SERVICE_URL:http://localhost:8083}
       endpoints:
-        create-order: ${RESTAURANT_CREATE_ORDER_ENDPOINT:/v1/restaurant/create/order}
-        cancel: ${RESTAURANT_CANCEL_ENDPOINT:/v1/restaurant/cancel/{restaurantId}/{orderId}}
+        create-order: ${RESTAURANT_CREATE_ORDER_ENDPOINT:/v1/restaurant/order/create}
+        cancel: ${RESTAURANT_CANCEL_ENDPOINT:/v1/restaurant/corder/cancel/{restaurantId}/{orderId}}

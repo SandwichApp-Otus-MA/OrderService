@@ -53,6 +53,7 @@ configmap:
   BILLING_SERVICE_URL: "http://billing-service:8080"
   DELIVERY_SERVICE_URL: "http://delivery-service:8080"
   RESTAURANT_SERVICE_URL: "http://restaurant-service:8080"
+  SANDWICH_KAFKA_SERVER: "http://sandwich-kafka:9092"
   SERVER_PORT: 8080
 secrets:
   SPRING_DATASOURCE_PASSWORD: "postgres-pswd"

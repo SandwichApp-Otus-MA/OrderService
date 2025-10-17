@@ -1,0 +1,12 @@
+sandwich:
+  kafka:
+    bootstrap-servers: ${SANDWICH_KAFKA_SERVER:http://localhost:9092}
+    security.protocol: ${SANDWICH_KAFKA_SECURITY_PROTOCOL:PLAINTEXT}
+    consumer:
+      group-id: ${SANDWICH_CONSUMER_GROUP_ID:sandwich-order-service}
+      topic:
+        order: ${SANDWICH_ORDER_TOPIC:sandwich-order}
+
+billing-service:
+  kafka:
+    excluded-consumers: ${EXCLUDED_CONSUMERS:}
